@@ -15,7 +15,10 @@ class TableInfo
   {
     $html = new \Module\Html\HtmlTable;
 
-    $query = "DESC members";
+    $uri = $_SERVER['REQUEST_URI'];
+    $uris = explode("/", $uri);
+
+    $query = "DESC ".$uris[2];
     $result = $this->db->queryExecute($query);
 
     $count = mysqli_num_rows($result);
