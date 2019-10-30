@@ -2,8 +2,9 @@
 $config = include '../dbconf.php';
 print_r($config);
 
-require '../Module/Database/Database.php';
-require '../Module/Database/Table.php';
+require '../Loading.php';
+// require '../Module/Database/Database.php';
+// require '../Module/Database/Table.php';
 
 $db = new Database($config);
 echo "<br>";
