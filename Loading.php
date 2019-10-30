@@ -4,6 +4,7 @@
 // 이 기능을 등록해 준다.
 // 익명함수로 지정
 spl_autoload_register(function($classname){
-  echo $classname;
-  require "../Module/Database/".$classname.".php";
+  // echo $classname;
+  require "../".$classname.".php";
+  //exit;
 });

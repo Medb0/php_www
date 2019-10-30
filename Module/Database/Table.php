@@ -1,5 +1,5 @@
 <?php
-
+namespace Module\Database;
 class Table
 {
   public $table_name;
@@ -8,7 +8,7 @@ class Table
 
   public function __construct($database)
   {
-    echo "테이블 클래스 생성<br>";
+    // echo "테이블 클래스 생성<br>";
     // 객체를 받아와서 $Database에 저장한다.
     $this->Database = $database;
   }
