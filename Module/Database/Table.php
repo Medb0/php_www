@@ -15,7 +15,6 @@ class Table
 
   public function createTable($name, array $fields)
   {
-    echo "테이블 생성을 시작하겠습니다.<br>";
     // 테이블을 생성할때 사용할 변수
     $query =
     "create table `".$name."` (`id` int(11) NOT NULL auto_increment,";

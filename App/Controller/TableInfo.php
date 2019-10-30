@@ -5,14 +5,30 @@ namespace App\Controller;
  */
 class TableInfo
 {
-
-  public function __construct()
+  private $db;
+  public function __construct($db)
   {
-    echo __CLASS__;
+    $this->db = $db;
   }
 
   public function main()
   {
-    echo "<br>main <br>";
+    $html = new \Module\Html\HtmlTable;
+
+    $query = "DESC members";
+    $result = $this->db->queryExecute($query);
+
+    $count = mysqli_num_rows($result);
+    $content = "";
+    $rows = [];
+    for ($i=0; $i<$count ; $i++) {
+      $row = mysqli_fetch_object($result);
+      $rows [] = $row;
+    }
+    $content = $html->table($rows);
+
+    $body = file_get_contents("../Resource/desc.html");
+    $body = str_replace("{{content}}", $content, $body);
+    echo $body;
   }
 }

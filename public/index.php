@@ -2,19 +2,14 @@
 $config = include '../dbconf.php';
 require '../Loading.php';
 
-// $desc = new App\Controller\TableInfo;
-// $desc->main();
-
 $uri = $_SERVER['REQUEST_URI'];
 $uris = explode("/", $uri);
-print_r($uris);
 
 $db = new \Module\Database\Database($config);
 
 if(isset($uris[1]) && $uris[1]){  // isset은 배열공간이 있는지 체크 && 공간안에 값이 있는지 체크
   // 컨트롤러 실행
-  echo $uris[1]."컨트롤러 실행";
-  $controllerName = "\App\Controller\\".ucfirst($uris[1]);
+  $controllerName = "App\Controller\\".ucfirst($uris[1]);
   $tables = new $controllerName($db);
   $tables->main();
 }else {

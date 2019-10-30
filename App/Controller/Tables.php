@@ -18,12 +18,15 @@ class Tables
     $count = mysqli_num_rows($result);
     $content = "";
 
-    for ($i=0; $i < $count ; $i++) {
+    for ($i=0; $i<$count ; $i++) {
       $row = mysqli_fetch_object($result);
-      $rows [] = $row;
+      $rows [] = [
+          'num'=>$i,
+          'name'=>"<a href='/TableInfo/".$row->Tables_in_php."'>".$row->Tables_in_php."</a>"
+      ];
     }
-
     $content = $html->table($rows);
+
     $body = file_get_contents("../Resource/table.html");
     $body = str_replace("{{content}}", $content, $body);
     echo $body;
