@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller;
 /**
- *
- */
+*
+*/
 class Select
 {
   private $db;
@@ -30,29 +30,52 @@ class Select
 
   public function newInsert($tableName)
   {
-
     print_r($_POST);  // post로 전달된 값은 $_POST로 사용 할 수 있음
 
     if ($_POST) {
-      $query = "INSERT INTO members (`FirstName`,`LastName`)
-                            VALUE('".$_POST['firstname']."','".$_POST['lastname']."')";
+
+      $fields = "(";
+      $data = "(";
+      foreach ($_POST as $key => $value) {
+        $fields .= "`".$key."` ,";
+        $data .= "'".$value."' ,";
+      }
+      $fields = rtrim($fields, ",");  // 마지막 콤마 제거
+      $data = rtrim($data, ",");  // 마지막 콤마 제거
+      $fields .= ")";
+      $data .= ")";
+
+      $query = "INSERT INTO ".$tableName. $fields ." VALUES ".$data;
+
+      echo "<br>";
       $result = $this->db->queryExecute($query);
 
       // 페이지 이동
       header("location:"."/select/".$tableName);
     }
 
+    $content ="<form method=\"post\">";
+    // $content .="<input type=\"text\" name=\"firstname\">";
+    // $content .="<input type=\"text\" name=\"lastname\">";
+
     $query = "DESC ".$tableName;
     $result = $this->db->queryExecute($query);
 
     $count = mysqli_num_rows($result);
-    $content = "";
     $rows = [];
-    for ($i=0; $i<$count ; $i++) {
+    echo "<br>";
+    for ($i=0;$i<$count;$i++) {
       $row = mysqli_fetch_object($result);
-      $rows [] = $row;
+      echo $i."번째";
+      print_r($row);
+      echo "<br>";
+      if ($row->Field=="id") continue;
+      $content .=$row->Field."<input type=\"text\" name=\"".$row->Field."\">";
+      $content .="<br>";
     }
-    $content = $this->Html->table($rows);
+
+    $content .="<input type=\"submit\" value=\"확인\">";
+    $content .="</form>";
 
     $body = file_get_contents("../Resource/insert.html");
     $body = str_replace("{{content}}", $content, $body);
@@ -85,11 +108,12 @@ class Select
       }
     }
     else {
-        $content = "선택된 테이블이 없습니다.";
+      $content = "선택된 테이블이 없습니다.";
     }
 
     $body = file_get_contents("../Resource/select.html");
     $body = str_replace("{{content}}", $content, $body);
+    $body = str_replace("{{new}}", $tableName."/new", $body);
     echo $body;
   }
 }
