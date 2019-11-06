@@ -63,12 +63,8 @@ class Select
 
     $count = mysqli_num_rows($result);
     $rows = [];
-    echo "<br>";
     for ($i=0;$i<$count;$i++) {
       $row = mysqli_fetch_object($result);
-      echo $i."번째";
-      print_r($row);
-      echo "<br>";
       if ($row->Field=="id") continue;
       $content .=$row->Field."<input type=\"text\" name=\"".$row->Field."\">";
       $content .="<br>";
