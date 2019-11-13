@@ -8,9 +8,8 @@ class Uri
 
   public function __construct()
   {
-    echo __CLASS__;
-
-    $this->uri = $_SERVER['REQUEST_URI'];
+    $uri = explode("?", $_SERVER['REQUEST_URI']);
+    $this->uri = $uri[0];
     $this->uris = explode("/", $this->uri);
     unset($this->uris[0]);  // 0번 배열 제거
   }
@@ -33,6 +32,13 @@ class Uri
   {
     if(isset($this->uris[3]) && $this->uris[3]){
       return $this->uris[3];
+    }
+  }
+
+  public function fourth()
+  {
+    if(isset($this->uris[4]) && $this->uris[4]){
+      return $this->uris[4];
     }
   }
 }
