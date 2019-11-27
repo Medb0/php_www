@@ -38,8 +38,10 @@ class Tables
   public function list()
   {
     $html = new \Module\Html\HtmlTable;
+
     $query = "SHOW TABLES";
     $result = $this->db->queryExecute($query);
+
     $count = mysqli_num_rows($result);
     $content = ""; // 초기화
     $rows = []; // 배열 초기화
@@ -54,6 +56,7 @@ class Tables
         'data'=>"<a href='/select/".$row->Tables_in_php."'>데이터조회</a>"
       ];
     }
+    print_r($rows);
     $content = $html->table($rows);
     $body = file_get_contents("../Resource/table.html");
     $body = str_replace("{{content}}",$content, $body); // 데이터 치환
