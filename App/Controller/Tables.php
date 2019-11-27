@@ -1,6 +1,6 @@
 <?php
 namespace App\Controller;
-class Tables
+class Tables extends Controller
 {
   private $db;
   // 생성자
@@ -56,7 +56,6 @@ class Tables
         'data'=>"<a href='/select/".$row->Tables_in_php."'>데이터조회</a>"
       ];
     }
-    print_r($rows);
     $content = $html->table($rows);
     $body = file_get_contents("../Resource/table.html");
     $body = str_replace("{{content}}",$content, $body); // 데이터 치환
