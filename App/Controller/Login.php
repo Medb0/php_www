@@ -15,8 +15,8 @@ class Login extends Controller
     print_r($_POST);
 
     // 관리자 계정 정보
-    $email = "bxcv1230@gmail.com";
-    $password = "abcd1234";
+    // $email = "bxcv1230@gmail.com";
+    // $password = "abcd1234";
 
     if($_SESSION['email']){
       echo "로그인 상태입니다.";
@@ -24,6 +24,12 @@ class Login extends Controller
       // 로그인 체크 및 저장
       if($_POST){
         if($_POST['email'] && $_POST['password']){
+          // 이메일이 맞는지 확인 , JS에서도 하지만 해킹당하면 뚫리기 때문에 서버에서도 검증하여 2중보안체제
+          if(filter_var($_POST['email'] , FILTER_VALIDATE_EMAIL) === false){
+            echo "올바르지 않은 이메일 주소 입니다.";
+            exit;
+          }
+
           $query = "SELECT * FROM mem where email='".$_POST['email']."';";
           echo $query;
           $result = $this->db->queryExecute($query);
