@@ -1,63 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DB Web Tools</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <style>
-            body {
-                padding-top: 56px;
-            }
-        </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>My Instagram Photos Feed With Bootstrap</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+
 </head>
+
 <body>
-    <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="#">Start Bootstrap</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Services</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
-              </li>
-            </ul>
+  <nav class="navbar navbar-light sticky-top bg-light">
+    <a class="navbar-brand" href=""><i class="fab fa-instagram"></i> Instagram</a>
+    <ul class="nav ">
+      <li class="nav-item">
+        <button type="button" class="btn btn-primary btn-md btn-success" id="write">글쓰기</button>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Log Out</a>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Modal Begin 글쓰기할때 나오는 창(창 이동후 하면 됨 == 딱히 필요없음)-->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
+  <!-- modal end -->
+
+  <div class="container-fluid ">
+    <!-- Nav pills -->
+    <!-- <ul class="nav nav-pills justify-content-center mt-4" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#home"><i class="fa fa-square" aria-hidden="true"></i></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#menu2"><i class="fa fa-th" aria-hidden="true"></i></a>
+      </li>
+    </ul> -->
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div id="home" class="container-fluid tab-pane active "><br>
+        <div class="row justify-content-center">
+          <div class="">
+            <!--  게시물 시작 -->
+            {{content}}
+
+            <!-- 게시물 종료 -->
           </div>
         </div>
-      </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-2">
-                <h1 class="my-4">인스타그램</h1>
-                <div class="list-group">
-                  {{categori}}
-                </div>
-            </div>
-            <div class="col-sm-10">
-                <h1>인스타그램</h1>
-                {{content}}
-                <a class="btn btn-primary btn-lg" href="{{new}}" role="button">글쓰기</a>
-            </div>
+      </div>
+      <!-- 게시물 여러개로 보기 -->
+      <!-- <div id="menu2" class="container-fluid tab-pane fade"><br>
+        <div class="row ">
         </div>
+      </div> -->
     </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script>
+    function likeUp(id) {
+
+      document.forms[id-1].submit();
+      // location.href = "instagram/"+id;  // 상세페이지로 이동할경우
+    }
+    const addBtn = document.getElementById("write");
+    addBtn.addEventListener("click", function() {
+      // document.forms.detail.submit();
+      document.location.href= "/instagram/new";
+    });
+    // $(function() {
+    //   $(document.).click(function(e) {
+    //     var id = e.target.getAttribute('alt');
+    //     alert(id);
+    //   });
+    // });
+  </script>
 </body>
 </html>

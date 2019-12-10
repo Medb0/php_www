@@ -5,82 +5,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>DB Web Tools</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <style>
-    body {
-      padding-top: 56px;
-    }
-  </style>
+  <title>My Instagram Photos Feed With Bootstrap</title>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 
 <body>
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Start Bootstrap</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home
-              <span class="sr-only">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Services</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-2">
-        <h1 class="my-4">인스타그램</h1>
-        <div class="list-group">
-          {{categori}}
+  <nav class="navbar navbar-light sticky-top bg-light">
+    <a class="navbar-brand" href="/instagram"><i class="fab fa-instagram"></i> Instagram</a>
+    <ul class="nav ">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cogs"></i></a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="/instagram">Home</a>
+          <a class="dropdown-item" href="/instagram/{{id}}/edit" id="edit">edit</a>
+          <a class="dropdown-item" href="/instagram/{{id}}/delete" id="delete">delete</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/instagram/new">New Post</a>
         </div>
-      </div>
-      <div class="col-sm-10">
-        <h1>{{title}}</h1>
-        <div class="row">
-          <div class="col-sm-6">
-            {{image}}
-          </div>
-          <div class="col-sm-6">
-            {{content}} <br>
-            {{likes}} <br>
+      </li>
+    </ul>
+  </nav>
+  <!-- Navigation -->
+  <div class="tab-content">
+    <div id="home" class="container-fluid tab-pane active "><br>
+      <div class="row justify-content-center">
+        <div class="">
+
+          <div class="card mx-auto custom-card" id="prova">
+            <div class="row post-header col-12 py-2 px-3">
+              <div class="col-6 float-left ">
+
+              </div>
+              <div class="col-6 float-right text-right post-number">
+
+              </div>
+            </div>
+            <div class="row post-header col-12 py-2 px-3">
+              <div class="col-9 float-left ">{{image}}</div>
+              <div class="col-3 float-right">
+                <h3 class="card-title">{{title}}</h1>
+                  <h5 class="card-text">{{likes}} Likes</h5>
+                  <p class="card-text">{{content}}</p>
+              </div>
+            </div>
+            <!-- <img class="card-img" src="https://assets.breatheco.de/apis/img/images.php?blob&tags=bobdylan" alt="Card image cap"> -->
             <form name="detail" method="post">
               <input type="hidden" name="uid" value="{{id}}">
               <input type="hidden" name="mode" value="likeup">
-              <button type="button" class="btn btn-success" id="LikeUp">좋아요</button>
+              <div class="row post-header px-3 pb-3">
+                <div class="col-1 float-left text-left"><i class="far fa-heart" id="LikeUp"></i></i></div>
+                <div class="col-10 float-left text-left">Comment...</div>
+                <div class="col-1 float-right text-right"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></div>
+              </div>
             </form>
           </div>
-        </div>
-      </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script>
-      const addBtn = document.getElementById("LikeUp");
-      addBtn.addEventListener("click", function(){
-        alert("좋아요!");
-        document.forms.detail.submit();
-        // document.location.href= "/instagram";
-      });
 
-    </script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+          <script>
+            const addBtn = document.getElementById("LikeUp");
+            addBtn.addEventListener("click", function() {
+              alert("좋아요!");
+              document.forms.detail.submit();
+            });
+            const removeBtn = document.getElementById("delete");
+            removeBtn.addEventListener("click", function() {
+              alert("삭제합니다.");
+              document.forms.detail.submit();
+              document.location.href = "/instagram/{{id}}/delete";
+            });
+          </script>
 </body>
 
 </html>
